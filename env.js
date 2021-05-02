@@ -1,8 +1,7 @@
-const fs = require("fs"),
-path = require('path')
-
-let env = {},
-file = fs.readFileSync(path.resolve(process.cwd(), '.env'), 'utf8')
+const fs = require('fs')
+, path = require('path')
+, env = {}
+, file = fs.readFileSync(path.resolve(process.cwd(), '.env'), 'utf8')
 
 file.toString().split(/\n|\r|\r\n/).map(async (linha) => {
 	let valor = linha.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/)
