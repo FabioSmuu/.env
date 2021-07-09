@@ -1,8 +1,6 @@
 const fs = require('fs'), path = require('path')
 
-const removeAspas = string => string[0] === '"' && string[string.length-1] === '"'
-	? string.substring(1, string.length-1).replace(/\\n/g, '\n')
-	: string.trim()
+const removeAspas = string => string.replace(/['"](\w*)['"]/g, '$1').trim().replace(/\\n/g, '\n')
 
 const registrar = (chave, valor) => {
 	if (!Object.prototype.hasOwnProperty.call(process.env, chave)) {
@@ -25,3 +23,5 @@ const formatar = linha => {
 
 const file = fs.readFileSync(path.resolve(process.cwd(), '.env'), 'utf8')
 file.toString().split(/\n|\r|\r\n/).forEach(formatar)
+
+//console.log(process.env)
